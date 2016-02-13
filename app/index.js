@@ -5,7 +5,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 import configureStore from './store/configureStore';
 
-import { fetchFriends } from './actions';
+import { setQuery, fetchFriends } from './actions';
 import App from './containers/App';
 import FriendSearchView from './containers/FriendSearchView';
 
@@ -22,6 +22,20 @@ store.subscribe((() => {
     }
 
     prevState = state;
+  };
+})());
+
+browserHistory.listen((() => {
+  let prevLocation = '';
+
+  return location => {
+    const locationChanged = location.search !== prevLocation.search;
+
+    if ((location.action === 'POP') && locationChanged) {
+      store.dispatch(setQuery(location.query.q));
+    }
+
+    prevLocation = location;
   };
 })());
 

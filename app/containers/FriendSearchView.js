@@ -26,22 +26,6 @@ class FriendSearchView extends Component {
     this.handleSearch = this.handleSearch.bind(this);
   }
 
-  // set query on page load
-  componentDidMount() {
-    const { dispatch, location: { query } } = this.props;
-    dispatch(setQuery(query.q));
-  }
-
-  // needed to set query on back/forward
-  componentWillReceiveProps({ location }) {
-    const { dispatch } = this.props;
-    const locationChanged = location.search !== this.props.location.search;
-
-    if ((location.action === 'POP') && locationChanged) {
-      dispatch(setQuery(location.query.q));
-    }
-  }
-
   handleSearch(value) {
     const { dispatch } = this.props;
     dispatch(setQuery(value));
