@@ -1,5 +1,6 @@
-# Imperative approach:
-Currently the most straightforward of the three solutions. Logic for dispatching actions and reading router state is all contained in react components. The most 'imperative' of the examples.
+# Using redux-loop:
+Effects like executing search and updating url are executed at the edges of the
+application. redux-loop is used to schedule async search in reducer.
 
 ## To run
 ```sh
