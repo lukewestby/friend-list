@@ -9,8 +9,15 @@ import FriendSearchView from './containers/FriendSearchView';
 
 const store = configureStore();
 
+let previousQuery = null;
 store.subscribe(() => {
   const { query } = store.getState();
+
+  if (query === previousQuery) {
+    return;
+  }
+
+  previousQuery = query;
   browserHistory.push({
     query: { q: query || undefined }
   });
